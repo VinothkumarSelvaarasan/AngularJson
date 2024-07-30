@@ -1,0 +1,111 @@
+<div class="form-container">
+    <form [formGroup]="videoForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="youtubeId">Video ID:</label>
+        <input type="text" id="youtubeId" formControlName="youtubeId" />
+        <div
+          *ngIf=" videoForm.get('youtubeId')?.hasError('required') &&
+          videoForm.get('youtubeId')?.touched
+          "
+          class="error">
+        Video ID is required.
+        </div>
+        <div
+        *ngIf="
+        videoForm.controls['youtubeId'].invalid &&
+          (videoForm.controls['youtubeId'].dirty ||
+          videoForm.controls['youtubeId'].touched)"class="error">
+      Video Id Should Unique
+      </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="videoName">Video Name</label>
+        <input type="text" id="videoName" formControlName="videoName" />
+        <div
+          *ngIf="
+          videoForm.get('videoName')?.hasError('required') &&
+          videoForm.get('videoName')?.touched
+          "
+          class="error"
+        >
+        Video Name is required.
+        </div>
+      </div>
+
+     
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" formControlName="title" />
+        <div
+          *ngIf="
+          videoForm.get('title')?.hasError('required') &&
+          videoForm.get('title')?.touched
+          "
+          class="error"
+        >
+        Title is required.
+        </div>
+      </div>
+
+
+  
+  
+      <div class="form-group">
+        <label for="videoType">Video Type:</label>
+        <input type="text" id="videoType" formControlName="videoType" />
+        <div
+          *ngIf="
+          videoForm.get('videoType')?.hasError('required') &&
+          videoForm.get('videoType')?.touched
+          "
+          class="error"
+        >
+        Video Type is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfPost">Date Of Post:</label>
+        <input type="text" id="dateOfPost" formControlName="dateOfPost" />
+        <div
+          *ngIf="
+          videoForm.get('dateOfPost')?.hasError('required') &&
+          videoForm.get('dateOfPost')?.touched
+          "
+          class="error"
+        >
+        Date Of Post is required.
+        </div>
+        <div
+        *ngIf="
+        videoForm.controls['dateOfPost'].invalid &&
+          (videoForm.controls['dateOfPost'].dirty ||
+          videoForm.controls['dateOfPost'].touched)
+        "
+        class="error"
+      >
+      Date Of Post  must be in YYYY-MM-DD format.
+      </div>
+      </div>
+
+      <div class="form-group">
+        <label for="videosRating">Video Rating:</label>
+        <input type="text" id="videosRating" formControlName="videosRating" />
+        <div
+          *ngIf="
+          videoForm.get('videosRating')?.hasError('required') &&
+          videoForm.get('videosRating')?.touched
+          "
+          class="error"
+        >
+        Video Rating is required.
+        </div>
+      </div>
+
+
+  
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  

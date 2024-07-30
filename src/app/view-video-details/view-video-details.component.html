@@ -1,0 +1,10 @@
+<div class="event" *ngFor="let youtubeD of videos$ | async">
+    <p>Youtube ID : {{ youtubeD.youtubeId }}</p>
+    <p>Video Name : {{ youtubeD.videoName  }}</p>
+    <p>Title : {{ youtubeD.title }}</p>
+    <p>Video Type : {{ youtubeD.videoType }}</p>
+    <p>Date Of Post : {{ youtubeD.dateOfPost }}</p>
+    <p>Video Rating : {{ youtubeD.videosRating }}</p>    
+  </div>
+
+  
