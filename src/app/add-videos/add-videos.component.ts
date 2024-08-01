@@ -26,7 +26,7 @@ export class AddVideosComponent  implements OnInit {
 
   ngOnInit(): void {
     this.videoForm = this.fb.group({
-      youtubeId: ["", [Validators.required,this.uniqueValidator]],
+      youtubeId:   [Validators.required,this.uniqueValidator],
       videoName: ["", [Validators.required, ]],
       title: ["", [Validators.required]],
       videoType: ["", [Validators.required]],
@@ -49,7 +49,7 @@ export class AddVideosComponent  implements OnInit {
     if(Array.isArray(value)){
       const youtubeIds = value.map((id:any) => id.youtubeId);
     // Simulate a list of existing student IDs (replace with your own data source)
-     if (youtubeId.includes(youtubeId)) {
+     if (youtubeIds.includes(youtubeId)) {
        return { unique: true }; // Validation failed because the ID is not unique
      } 
     }
@@ -60,14 +60,25 @@ export class AddVideosComponent  implements OnInit {
   onSubmit() {
     if (this.videoForm.valid) {
       // Form is valid, you can submit it
-      this.youtubeService.addVideos(this.videoForm.value).subscribe((res) => {
+      this.youtubeService.addVideos(this.videoForm.value)
+      .subscribe((res) => {
         this.router.navigateByUrl('video-list')
       });
      
     } else {
- 
+      // Form is invalid, display error messages
+      this.markFormGroupTouched(this.videoForm);
     }
   }
 
-}
+  // Helper function to mark all controls in the form group as touched
+  markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach((control) => {
+      control.markAsTouched();
 
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
+}

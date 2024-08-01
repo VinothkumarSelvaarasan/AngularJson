@@ -19,7 +19,10 @@ export class ViewVideosComponent implements OnInit {
     this.getVideos();
   }
   getVideos() {
-    this.video1$ = this.youtubeService.getVideos();
+    this.video1$ = this.youtubeService.getVideos().pipe(
+    map(videos => videos.sort((a:any, b:any) => a.videoName.localeCompare(b.videoName)))
+          );
+    this.filteredVideos$ = this.video1$;
     console.log("Data1 that is video1 $ Value",this.video1$);
      this.filteredVideos$ = this.video1$;
      this.filteredVideos$.pipe(toArray());
@@ -28,13 +31,16 @@ export class ViewVideosComponent implements OnInit {
      insuranceArray = insu;
      if (insuranceArray) {
       const Array = JSON.stringify(insuranceArray);
-      localStorage.setItem('employeeArray', Array);
-     console.log("Data ",localStorage.getItem('employeeArray'));
+      localStorage.setItem('youtube', Array);
+     console.log("Data ",localStorage.getItem('youtube'));
     }
   // Now you have your array of values
 
  });
   }
+
+
+
 
   searchVideo(event: any) {
     const searchTerm = event.target.value.trim();
@@ -44,9 +50,9 @@ export class ViewVideosComponent implements OnInit {
     }
     this.filteredVideos$ = this.video1$.pipe(
       map((vid) => {
-        return vid.filter(
-          (vid) =>
-            vid.youtubeId.toString().includes(searchTerm)
+        return vid.filter((vid) =>
+            vid.youtubeId.toString().includes(searchTerm) ||
+            vid.videoName.toString().includes(searchTerm)
         );
       })
     );

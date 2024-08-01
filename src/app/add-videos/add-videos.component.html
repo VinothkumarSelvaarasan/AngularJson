@@ -3,10 +3,8 @@
       <div class="form-group">
         <label for="youtubeId">Video ID:</label>
         <input type="text" id="youtubeId" formControlName="youtubeId" />
-        <div
-          *ngIf=" videoForm.get('youtubeId')?.hasError('required') &&
-          videoForm.get('youtubeId')?.touched
-          "
+        <div *ngIf=" videoForm.get('youtubeId')?.hasError('required') && 
+                     videoForm.get('youtubeId')?.touched"
           class="error">
         Video ID is required.
         </div>
@@ -14,7 +12,7 @@
         *ngIf="
         videoForm.controls['youtubeId'].invalid &&
           (videoForm.controls['youtubeId'].dirty ||
-          videoForm.controls['youtubeId'].touched)"class="error">
+          videoForm.controls['youtubeId'].touched)" class="error">
       Video Id Should Unique
       </div>
       </div>
